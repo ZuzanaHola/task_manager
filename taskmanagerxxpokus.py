@@ -19,13 +19,15 @@ spravce_ukolu +="Vyberte možnost (1-4):\n"
 # print(spravce_ukolu)
 
 def pridat_ukol():
-    #print("Přidat nový úkol: \n\n")
-    nazev=input("Zadejte název úkolu: ")
-    popis=input("Zadejte popis úkolu: ")
     
-    if nazev == "" or popis == "":
-        print("Zadali jste prázdný vstup, zkuste to znovu.\n")
-        return pridat_ukol()
+    while True: 
+        nazev=input("Zadejte název úkolu: ")
+        popis=input("Zadejte popis úkolu: ")
+    
+        if nazev == "" or popis == "":
+            print("Zadali jste prázdný vstup, zkuste to znovu.\n")
+            continue
+        break
     
     ukoly.append([nazev, popis])
     print("úkol \'" + nazev + "\' byl přidán")

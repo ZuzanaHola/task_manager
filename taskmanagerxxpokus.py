@@ -6,8 +6,7 @@ Created on Mon Apr 13 16:37:04 2026
 @author: zuzah
 """
 
-
-ukoly=[]
+ukoly={}
 
 spravce_ukolu = "Správce úkolů - Hlavní menu\n"
 spravce_ukolu += "1. Přidat nový úkol\n"
@@ -29,34 +28,73 @@ def pridat_ukol():
             continue
         break
     
-    ukoly.append([nazev, popis])
-    print("úkol \'" + nazev + "\' byl přidán")
-    print()
+    while True:
+        print("Chcete opravdu přidat úkol: \'" + nazev + "\'")
+        print()
+        
+        volba=input("přidat úkol=ano,\n nechci přidat a zpět do hlavního menu=ne:\n ")
+        print()
+        
+        if volba == "ne":
+            return 
+        if volba =="ano":
+            ukoly[nazev]= popis #ulozeni, popisu do promenné ukoly pod kličem nazev - [klič]=hodnota
+            print("úkol \'" + nazev + "\' byl přidán")
+            print()
+            break 
+        else: 
+            print("zadali jste neplatnou hodnotu, zkusteto znovu")
         
     
 def zobrazit_ukoly():
    # print("Zobrazit všchny úkoly: \n\n")
    print("seznam úkolů: ")
-   for index, ukol in enumerate(ukoly):  
-       print (str(index+1) + ". ",ukol[0] + " - " + ukol[1])
-   print()
-    
+   cislovany_seznam = {}
+   i = 1
+   # projde pary nazev - popis ve slovniku ukoly .items --> bere dvojice klic hodnota
+   for nazev, popis in ukoly.items():
+       print(f"{i}. {nazev} - {popis}")
+       cislovany_seznam[i] = nazev #ulození, nazvu ukolu do cislovaneho seznamu pod klicem i
+       i += 1
+        
+       
+   print() #prazdny radek
+   
+   return cislovany_seznam
+   
     
 def odstranit_ukol():
     # print("Odstranit úkol: \n\n")
     
     while True:
-        zobrazit_ukoly()
-        odstranit_polozku=input("Zadej číslo úkolu, který chcete odstranit: ")
-           
+        #vysat seznan ukolu {cislo - nazev}
+        seznam_ukolu = zobrazit_ukoly()
+        
+        #rekne si o cislo, ktere chceme odstranit
+        odstranit_polozku = input("Zadejte číslo úkolu, který chcete odstranit(0=zpět): ")
+        
+        #odstraneni ukolu
         try:
-           odstranit_polozku=int(odstranit_polozku)
-           break
+           odstranit_polozku = int(odstranit_polozku)
+           
+       #zadaní neplatné hodnoty
         except ValueError:
             print("Nesprávná hodnota, zadej číslo")
+            continue 
+        if odstranit_polozku not in seznam_ukolu:
+            print("Zadané číslo neexistuje v seznamu, zvolte jiné")
+            continue
+        break
+        
+    #zadani nula bude zpet
+    if odstranit_polozku == 0: 
+        return 
+      
     
-    odstraneno=ukoly.pop(odstranit_polozku-1)
-    print("úkol \'" +odstraneno[0]+"\' byl odstraněn.")
+   #cislo se zmeni zpet na odpoviajici nazev ukolu
+    nazev_ukolu = seznam_ukolu[odstranit_polozku]
+    ukoly.pop(nazev_ukolu)
+    print("úkol \'" +nazev_ukolu+"\' byl odstraněn.")
     print()
 
 

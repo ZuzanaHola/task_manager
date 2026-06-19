@@ -20,7 +20,11 @@ spravce_ukolu +="Vyberte možnost (1-4):\n"
 def pridat_ukol():
     
     while True: 
-        nazev=input("Zadejte název úkolu: ")
+        nazev=input("Zadejte název úkolu(max 40 znaků): ")
+        if len(nazev)>40:
+            print("zadali jste moc dlouhý název")
+            continue 
+        
         popis=input("Zadejte popis úkolu: ")
     
         if nazev == "" or popis == "":

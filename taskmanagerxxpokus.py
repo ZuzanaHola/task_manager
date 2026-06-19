@@ -56,8 +56,11 @@ def zobrazit_ukoly():
        print(f"{i}. {nazev} - {popis}")
        cislovany_seznam[i] = nazev #ulození, nazvu ukolu do cislovaneho seznamu pod klicem i
        i += 1
-        
        
+   if len(cislovany_seznam) == 0:
+       print("Žádné úkoly")
+           
+        
    print() #prazdny radek
    
    return cislovany_seznam

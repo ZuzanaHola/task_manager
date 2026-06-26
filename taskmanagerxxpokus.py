@@ -36,7 +36,7 @@ def pridat_ukol():
         print("Chcete opravdu přidat úkol: \'" + nazev + "\'")
         print()
         
-        volba=input("přidat úkol=ano,\n nechci přidat a zpět do hlavního menu=ne:\n ")
+        volba=input("přidat úkol = ano\n nechci přidat a zpět do hlavního menu = ne:\n ")
         print()
         
         if volba == "ne":
@@ -62,7 +62,7 @@ def zobrazit_ukoly():
        i += 1
        
    if len(cislovany_seznam) == 0:
-       print("Žádné úkoly")
+       print("nemáte zadaný žádný úkol")
            
         
    print() #prazdny radek
@@ -88,14 +88,17 @@ def odstranit_ukol():
         except ValueError:
             print("Nesprávná hodnota, zadej číslo")
             continue 
+        
+        #zadani nula bude zpet
+        if odstranit_polozku == 0: 
+            return 
+        
         if odstranit_polozku not in seznam_ukolu:
             print("Zadané číslo neexistuje v seznamu, zvolte jiné")
             continue
         break
         
-    #zadani nula bude zpet
-    if odstranit_polozku == 0: 
-        return 
+  
       
     
    #cislo se zmeni zpet na odpoviajici nazev ukolu
